@@ -31,10 +31,9 @@ import socket
 import subprocess
 from typing import List  # noqa: F401
 from libqtile import layout, bar, widget, hook, qtile
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule, ScratchPad, DropDown
 from libqtile.command import lazy
 
-from libqtile.widget import Spacer
 
 #mod4 or mod = super key
 mod = "mod4"
@@ -54,6 +53,21 @@ def window_to_next_group(qtile):
     if qtile.currentWindow is not None:
         i = qtile.groups.index(qtile.currentGroup)
         qtile.currentWindow.togroup(qtile.groups[i + 1].name)
+
+# @lazy.function
+# def increase_margin(layout):
+#     layout.margin += 70
+#     layout.group.layout_all()
+# @lazy.function
+# def decrease_margin(layout):
+#     new_margin = layout.margin - 70
+#     if new_margin < 0:
+#         new_margin = 0
+
+#     layout.margin = new_margin
+
+#     layout.group.layout_all()
+
 
 myTerm = "alacritty" # My terminal of choice
 
@@ -76,7 +90,7 @@ keys = [
 # SUPER + SHIFT KEYS
 
     Key([mod, "shift"], "Return", lazy.spawn('pcmanfm')),
-    Key([mod, "shift"], "d", lazy.spawn("dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'")),
+    Key([mod, "shift"], "d", lazy.spawn("dmenu_run -i -nb '#191919' -nf '#ff1493' -sb '#ff1493' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=15'")),
 #    Key([mod, "shift"], "d", lazy.spawn(home + '/.config/qtile/scripts/dmenu.sh')),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
@@ -146,6 +160,19 @@ keys = [
 
 
 # RESIZE UP, DOWN, LEFT, RIGHT
+
+    # Key([mod], "h",
+    #     # lazy.layout.shrink(),
+    #     lazy.layout.increase_margin(),
+    #     desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
+    #     ),
+    # Key([mod], "l",
+    #     # lazy.layout.grow(),
+    #     lazy.layout.decrease_margin(),
+    #     desc='Expand window (MonadTall), increase number in master pane (Tile)'
+    #     ),
+
+
     Key([mod, "control"], "l",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
@@ -270,7 +297,7 @@ for i in groups:
 
 
 def init_layout_theme():
-    return {"margin":10,
+    return {"margin":8,
             "border_width":2,
             "border_focus": "#ff00ff",
             "border_normal": "#f4c2c2"
@@ -302,8 +329,27 @@ layouts = [
     layout.Zoomy(**layout_theme)
 ]
 
-# COLORS FOR THE BAR
+# ScratchPads
+groups.append(
+        ScratchPad(
+            'scratchpad', [
+                DropDown('term', 'alacritty', width=0.7, height=0.6, x=0.15, y=0.1, opacity=1),
+                DropDown('fm', 'pcmanfm', width=0.4, height=0.5, x=0.3, y=0.1, opacity=0.5),
 
+                ]
+            )
+        )
+
+# Extend keys for scratchPad
+keys.extend(
+        [
+            Key(["control"], "Return", lazy.group['scratchpad'].dropdown_toggle('term')),
+            # Key(["control"], "s", lazy.group['scratchpad'].dropdown_toggle('fm')),
+            ]
+        )
+
+
+# COLORS FOR THE BAR
 
 def init_colors():
     return [["#2F343F", "#2F343F"], # color 0

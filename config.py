@@ -24,6 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# This config is inspired by https://github.com/arcolinux/arcolinux-qtile
 
 import os
 import re
@@ -253,7 +254,31 @@ keys = [
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
 
 # TOGGLE FLOATING LAYOUT
-    Key([mod, "shift"], "space", lazy.window.toggle_floating()),]
+    Key([mod, "shift"], "space", lazy.window.toggle_floating()),
+
+    ]
+
+def window_to_previous_screen(qtile, switch_group=False, switch_screen=False):
+    i = qtile.screens.index(qtile.current_screen)
+    if i != 0:
+        group = qtile.screens[i - 1].group.name
+        qtile.current_window.togroup(group, switch_group=switch_group)
+        if switch_screen == True:
+            qtile.cmd_to_screen(i - 1)
+
+def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
+    i = qtile.screens.index(qtile.current_screen)
+    if i + 1 != len(qtile.screens):
+        group = qtile.screens[i + 1].group.name
+        qtile.current_window.togroup(group, switch_group=switch_group)
+        if switch_screen == True:
+            qtile.cmd_to_screen(i + 1)
+
+keys.extend([
+    # MOVE WINDOW TO NEXT SCREEN
+    Key([mod,"shift"], "Right", lazy.function(window_to_next_screen, switch_screen=True)),
+    Key([mod,"shift"], "Left", lazy.function(window_to_previous_screen, switch_screen=True)),
+])
 
 groups = []
 
@@ -333,7 +358,7 @@ layouts = [
 groups.append(
         ScratchPad(
             'scratchpad', [
-                DropDown('term', 'alacritty', width=0.7, height=0.6, x=0.15, y=0.1, opacity=1),
+                DropDown('term', 'alacritty', width=0.8, height=0.7, x=0.1, y=0.1, opacity=1),
                 DropDown('fm', 'pcmanfm', width=0.4, height=0.5, x=0.3, y=0.1, opacity=0.5),
 
                 ]
@@ -355,7 +380,7 @@ def init_colors():
     return [["#2F343F", "#2F343F"], # color 0
             ["#2F343F", "#2F343F"], # color 1
             ["#c0c5ce", "#c0c5ce"], # color 2
-            ["#ff5050", "#ff5050"], # color 3
+            ["#ff5555", "#ff5555"], # color 3
             ["#f4c2c2", "#f4c2c2"], # color 4
             ["#ffffff", "#ffffff"], # color 5
             ["#ffd47e", "#ffd47e"], # color 6
@@ -374,8 +399,8 @@ def init_colors():
             ["#56b6c2", "#56b6c2"], #19 
             ["#b48ead", "#b48ead"], #20 
             ["#e06c75", "#e06c75"], #21
-            ["#fb9f7f", "#fb9f7f"], #22
-            ["#ffd47e", "#ffd47e"]] #23
+            ["#ff79c6", "#ff79c6"], #22
+            ["#ffb86c", "#ffb86c"]] #23
 
 colors = init_colors()
 
@@ -586,7 +611,7 @@ dgroups_app_rules = []
 #         if wm_class in list(d.values())[i]:
 #             group = list(d.keys())[i]
 #             client.togroup(group)
-#             client.group.cmd_toscreen()
+#             client.group.cmd_toscreen(toggle=False)
 
 # END
 # ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
@@ -618,7 +643,16 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
+    # Run the utility of `xprop` to see the wm class and name of an X client.
     *layout.Floating.default_float_rules,
+    Match(wm_class='confirmreset'),  # gitk
+    Match(wm_class='makebranch'),  # gitk
+    Match(wm_class='maketag'),  # gitk
+    Match(wm_class='ssh-askpass'),  # ssh-askpass
+    Match(title='branchdialog'),  # gitk
+    Match(title='pinentry'),  # GPG key password entry
+    Match(wm_class='Arcolinux-welcome-app.py'),
+    Match(wm_class='Arcolinux-calamares-tool.py'),
     Match(wm_class='confirm'),
     Match(wm_class='dialog'),
     Match(wm_class='download'),

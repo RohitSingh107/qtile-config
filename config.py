@@ -42,8 +42,7 @@ from groups import groups
 from defaults import myTerm, home, mod, mod1, mod2
 from scratchpads import scratchpad
 from keys import keys
-from layouts import layouts
-from floating_layout import floating_layout
+from layouts import layouts, floating_layout
 
 # ScratchPads
 groups.append(scratchpad)

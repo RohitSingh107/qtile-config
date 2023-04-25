@@ -2,19 +2,21 @@
 from libqtile import layout
 from libqtile.config import Match
 
+from colorschemes import colors
+
 def init_layout_theme():
     return {"margin":8,
             "border_width":2,
-            "border_focus": "#ff00ff",
-            "border_normal": "#f4c2c2"
+            "border_focus": colors[0],
+            "border_normal": colors[8]
             }
 
 layout_theme = init_layout_theme()
 
 
 layouts = [
-    layout.MonadTall(margin=8, border_width=2, border_focus="#ff00ff", border_normal="#f4c2c2"),
-    layout.MonadWide(margin=8, border_width=2, border_focus="#ff00ff", border_normal="#f4c2c2"),
+    layout.MonadTall(margin=8, border_width=3, border_focus=colors[4], border_normal=colors[14]),
+    layout.MonadWide(margin=8, border_width=3, border_focus=colors[4], border_normal=colors[14]),
     layout.Matrix(**layout_theme),
     layout.Bsp(**layout_theme),
     layout.Floating(**layout_theme),
@@ -26,8 +28,8 @@ layouts = [
     layout.TreeTab(
         sections=['FIRST', 'SECOND'],
         bg_color = '#141414',
-        active_bg = '#0000ff',
-        inactive_bg = '#1e90ff',
+        active_bg = colors[4],
+        inactive_bg = colors[13],
         padding_y =5,
         section_top =10,
         panel_width = 280),

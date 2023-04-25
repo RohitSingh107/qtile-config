@@ -1,6 +1,5 @@
 from libqtile.config import Group
 
-from scratchpads import scratchpad
 
 groups = []
 

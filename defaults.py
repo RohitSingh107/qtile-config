@@ -7,5 +7,6 @@ mod1 = "alt"
 mod2 = "control"
 home = os.path.expanduser('~')
 myTerm = "alacritty" # My terminal of choice
+colorscheme = "default"
 
 

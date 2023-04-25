@@ -5,20 +5,6 @@ from defaults import mod, mod1, mod2, home, myTerm
 from groups import groups
 
 
-@lazy.function
-def window_to_prev_group(qtile):
-    if qtile.currentWindow is not None:
-        i = qtile.groups.index(qtile.currentGroup)
-        qtile.currentWindow.togroup(qtile.groups[i - 1].name)
-
-
-@lazy.function
-def window_to_next_group(qtile):
-    if qtile.currentWindow is not None:
-        i = qtile.groups.index(qtile.currentGroup)
-        qtile.currentWindow.togroup(qtile.groups[i + 1].name)
-
-
 def window_to_previous_screen(qtile, switch_group=False, switch_screen=False):
     i = qtile.screens.index(qtile.current_screen)
     if i != 0:
@@ -220,19 +206,26 @@ keys = [
     Key([mod, "shift"], "Left", lazy.layout.swap_left()),
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
 
-    # TOGGLE FLOATING LAYOUT
-    Key([mod, "shift"], "space", lazy.window.toggle_floating()),
-
-]
 
 
-keys.extend([
     # MOVE WINDOW TO NEXT SCREEN
     Key([mod, "shift"], "Right", lazy.function(
         window_to_next_screen, switch_screen=True)),
     Key([mod, "shift"], "Left", lazy.function(
         window_to_previous_screen, switch_screen=True)),
-])
+
+
+
+    # TOGGLE FLOATING LAYOUT
+    Key([mod, "shift"], "space", lazy.window.toggle_floating()),
+
+
+
+    # ScratchPad
+    Key(["control"], "Return", lazy.group['scratchpad'].dropdown_toggle('term')),
+    # Key(["control"], "s", lazy.group['scratchpad'].dropdown_toggle('fm')),
+]
+
 
 
 for i in groups:
@@ -253,9 +246,10 @@ for i in groups:
     ])
 
 
-keys.extend(
-    [
-        Key(["control"], "Return", lazy.group['scratchpad'].dropdown_toggle('term')),
-        # Key(["control"], "s", lazy.group['scratchpad'].dropdown_toggle('fm')),
-    ]
-)
+# MOUSE CONFIGURATION
+mouse = [
+    Drag([mod], "Button1", lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(),
+         start=lazy.window.get_size())
+]

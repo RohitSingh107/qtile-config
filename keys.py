@@ -23,18 +23,26 @@ def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
             qtile.cmd_to_screen(i + 1)
 
 
-## Need work here
-@lazy.function
-def increase_gaps(qtile):
-    qtile.current_layout.margin += 10
-    qtile.current_group.layout_all()
+# ## Need work here
+# @lazy.function
+# def increase_gaps(qtile):
+#     qtile.current_layout.margin += 10
+#     qtile.current_group.layout_all()
+#
+#
+# @lazy.function
+# def decrease_gaps(qtile):
+#     if qtile.current_layout.margin > 0:
+#         qtile.current_layout.margin -= 10
+#         qtile.current_group.layout_all()
 
+@lazy.layout.function
+def change_layout_gap(layout, adjustment):
+    if adjustment < 0 and layout.margin <= 0:
+        return
+    layout.margin += adjustment
+    layout.cmd_reset()
 
-@lazy.function
-def decrease_gaps(qtile):
-    if qtile.current_layout.margin > 0:
-        qtile.current_layout.margin -= 10
-        qtile.current_group.layout_all()
 
 keys = [
 
@@ -65,7 +73,7 @@ keys = [
 
     # CONTROL + ALT KEYS
 
-    Key(["mod1", "control"], "o", lazy.spawn(
+    Key(["mod1", "control"], "p", lazy.spawn(
         home + '/.config/qtile/scripts/picom-toggle.sh')),
     Key(["mod1", "control"], "t", lazy.spawn('xterm')),
     Key(["mod1", "control"], "u", lazy.spawn('pavucontrol')),
@@ -239,10 +247,10 @@ keys = [
     # Key(["control"], "s", lazy.group['scratchpad'].dropdown_toggle('fm')),
 
     # Increase/Decrease Gaps
-    Key([mod], 'i', increase_gaps()),
-    Key([mod], 'o', decrease_gaps()),
+    Key([mod], 'g', change_layout_gap(adjustment=-1), desc='decrease gap by 1'),
+    Key([mod, 'shift'], 'g', change_layout_gap(
+        adjustment=1), desc='increase gap by 1')
 ]
-
 
 
 for i in groups:

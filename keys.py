@@ -23,6 +23,19 @@ def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
             qtile.cmd_to_screen(i + 1)
 
 
+## Need work here
+@lazy.function
+def increase_gaps(qtile):
+    qtile.current_layout.margin += 10
+    qtile.current_group.layout_all()
+
+
+@lazy.function
+def decrease_gaps(qtile):
+    if qtile.current_layout.margin > 0:
+        qtile.current_layout.margin -= 10
+        qtile.current_group.layout_all()
+
 keys = [
 
 
@@ -224,6 +237,10 @@ keys = [
     # ScratchPad
     Key(["control"], "Return", lazy.group['scratchpad'].dropdown_toggle('term')),
     # Key(["control"], "s", lazy.group['scratchpad'].dropdown_toggle('fm')),
+
+    # Increase/Decrease Gaps
+    Key([mod], 'i', increase_gaps()),
+    Key([mod], 'o', decrease_gaps()),
 ]
 
 

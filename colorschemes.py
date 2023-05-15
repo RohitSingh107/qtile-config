@@ -1,5 +1,9 @@
 
-from defaults import colorscheme
+from defaults import colorscheme, home
+# import yaml
+#
+# with open(home + '/.cache/wal/colors.yml', 'r') as f:
+#     pywal_colors = yaml.safe_load(f)
 
 colorschemes = {
     "default": [["#ff5555", "#ff5555"],  # 0
@@ -17,7 +21,9 @@ colorschemes = {
                 ["#b48ead", "#b48ead"],  # 12
                 ["#ff79c6", "#ff79c6"],  # 13
                 ["#e06c75", "#e06c75"],  # 14
-                ["#ffb86c", "#ffb86c"]]  # 15
+                ["#ffb86c", "#ffb86c"]], # 15
+
+    # "pywal" : [[c, c] for c in pywal_colors["colors"].values()],
 }
 
 def init_colors(colorscheme="default"):

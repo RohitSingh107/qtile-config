@@ -1,7 +1,7 @@
 import os
 from libqtile import bar, widget, qtile
 
-from defaults import myTerm
+from defaults import myTerm, home
 from colorschemes import colors
 
 
@@ -89,16 +89,44 @@ def init_widgets_list():
             font="Noto Sans",
             fontsize=16,
             # Here enter your network name
-            interface=["wlp6s0"],
+            interface=["wl01"],
             format='{down} ↓↑ {up}',
             foreground=colors[1],
             background=colors[11],
             padding=0,
         ),
+        widget.Image(
+
+                foreground=colors[1],
+                background=colors[2],
+                fontsize=16,
+                filename= home + '/.config/qtile/icons/HDD.png',
+                margin = 1,
+                ),
+        widget.DF(
+                foreground=colors[1],
+                background=colors[2],
+                fontsize=16,
+                warn_space=30,
+                warn_color='ff0000',
+                format = '{p} ({uf}{m}|{r:.0f}%)',
+
+                mouse_callbacks={
+                    'Button1': lambda: qtile.cmd_spawn('gparted')},
+        ),
+
+        widget.Image(
+
+                foreground=colors[1],
+                background=colors[13],
+                fontsize=16,
+                filename= home + '/.config/qtile/icons/cpu.png',
+                margin = 1,
+                ),
 
         widget.CPU(
             font="Noto Sans",
-            #format = '{MemUsed}M/{MemTotal}M',
+            format = '{freq_current}GHz {load_percent}%',
             update_interval=1,
             fontsize=16,
             foreground=colors[1],
@@ -107,6 +135,14 @@ def init_widgets_list():
                 'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
         ),
 
+        widget.Image(
+
+                foreground=colors[1],
+                background=colors[9],
+                fontsize=16,
+                filename= home + '/.config/qtile/icons/memory.png',
+                margin = 4,
+                ),
         widget.Memory(
             font="Noto Sans",
             format='{MemUsed: .0f}M/{MemTotal: .0f}M',
@@ -118,6 +154,16 @@ def init_widgets_list():
             mouse_callbacks={
                 'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
         ),
+
+        widget.Image(
+
+                foreground=colors[1],
+                background=colors[15],
+                fontsize=16,
+                filename= home + '/.config/qtile/icons/clock.png',
+                margin = 1,
+                ),
+
 
         widget.Clock(
             foreground=colors[4],

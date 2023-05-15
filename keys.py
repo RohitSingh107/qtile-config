@@ -64,7 +64,7 @@ keys = [
     # SUPER + SHIFT KEYS
 
     Key([mod, "shift"], "Return", lazy.spawn('pcmanfm')),
-    Key([mod, "shift"], "d", lazy.spawn('nwggrid -p -o 0.4')),
+    # Key([mod], "d", lazy.spawn('nwggrid -p -o 0.4')),
     #    Key([mod, "shift"], "d", lazy.spawn(home + '/.config/qtile/scripts/dmenu.sh')),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),

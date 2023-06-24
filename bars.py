@@ -66,7 +66,7 @@ def init_widgets_list():
             txt_minimized='>_ ',
             borderwidth=1,
             background=colors[12],
-            #unfocused_border = 'border'
+            # unfocused_border = 'border'
         ),
 
         widget.CurrentLayoutIcon(
@@ -97,36 +97,36 @@ def init_widgets_list():
         ),
         widget.Image(
 
-                foreground=colors[1],
-                background=colors[2],
-                fontsize=16,
-                filename= home + '/.config/qtile/icons/HDD.png',
-                margin = 1,
-                ),
+            foreground=colors[1],
+            background=colors[2],
+            fontsize=16,
+            filename=home + '/.config/qtile/icons/HDD.png',
+            margin=1,
+        ),
         widget.DF(
-                foreground=colors[1],
-                background=colors[2],
-                fontsize=16,
-                warn_space=30,
-                warn_color='ff0000',
-                format = '{p} ({uf}{m}|{r:.0f}%)',
+            foreground=colors[1],
+            background=colors[2],
+            fontsize=16,
+            warn_space=30,
+            warn_color='ff0000',
+            format='{p} ({uf}{m}|{r:.0f}%)',
 
-                mouse_callbacks={
-                    'Button1': lambda: qtile.cmd_spawn('gparted')},
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn('gparted')},
         ),
 
         widget.Image(
 
-                foreground=colors[1],
-                background=colors[13],
-                fontsize=16,
-                filename= home + '/.config/qtile/icons/cpu.png',
-                margin = 1,
-                ),
+            foreground=colors[1],
+            background=colors[13],
+            fontsize=16,
+            filename=home + '/.config/qtile/icons/cpu.png',
+            margin=1,
+        ),
 
         widget.CPU(
             font="Noto Sans",
-            format = '{freq_current}GHz {load_percent}%',
+            format='{freq_current}GHz {load_percent}%',
             update_interval=1,
             fontsize=16,
             foreground=colors[1],
@@ -137,12 +137,12 @@ def init_widgets_list():
 
         widget.Image(
 
-                foreground=colors[1],
-                background=colors[9],
-                fontsize=16,
-                filename= home + '/.config/qtile/icons/memory.png',
-                margin = 4,
-                ),
+            foreground=colors[1],
+            background=colors[9],
+            fontsize=16,
+            filename=home + '/.config/qtile/icons/memory.png',
+            margin=4,
+        ),
         widget.Memory(
             font="Noto Sans",
             format='{MemUsed: .0f}M/{MemTotal: .0f}M',
@@ -157,19 +157,19 @@ def init_widgets_list():
 
         widget.Image(
 
-                foreground=colors[1],
-                background=colors[15],
-                fontsize=16,
-                filename= home + '/.config/qtile/icons/clock.png',
-                margin = 1,
-                ),
+            foreground=colors[1],
+            background=colors[15],
+            fontsize=16,
+            filename=home + '/.config/qtile/icons/clock.png',
+            margin=1,
+        ),
 
 
         widget.Clock(
             foreground=colors[4],
             background=colors[15],
             fontsize=16,
-            format="%Y-%m-%d %H:%M"
+            format="%Y-%m-%d %I:%M"
         ),
 
         widget.Systray(

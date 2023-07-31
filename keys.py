@@ -1,7 +1,7 @@
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule, ScratchPad, DropDown
 from libqtile.command import lazy
 
-from defaults import mod, mod1, mod2, home, myTerm
+from defaults import mod, mod1, mod2, home, myTerm, systemMonitor
 from groups import groups
 
 
@@ -89,7 +89,7 @@ keys = [
 
     # CONTROL + SHIFT KEYS
 
-    Key([mod2, "shift"], "Escape", lazy.spawn('lxtask')),
+    Key([mod2, "shift"], "Escape", lazy.spawn(systemMonitor)),
 
 
     # SCREENSHOTS

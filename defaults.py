@@ -3,7 +3,7 @@ import os
 from libqtile import qtile
 
 if qtile.core.name == "x11":
-    myTerm = "alacritty"
+    myTerm = "kitty"
 elif qtile.core.name == "wayland":
     myTerm = "foot"
 
@@ -14,5 +14,7 @@ mod2 = "control"
 home = os.path.expanduser('~')
 # myTerm = "alacritty" # My terminal of choice
 colorscheme = "default"
+
+systemMonitor = "missioncenter"
 
 

@@ -65,14 +65,14 @@ def init_widgets_list():
             txt_floating='🗗',
             txt_minimized='>_ ',
             borderwidth=1,
-            background=colors[12],
+            background='#de3163',
             # unfocused_border = 'border'
         ),
 
         widget.CurrentLayoutIcon(
             custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
             foreground=colors[1],
-            background=colors[0],
+            background= '#e0115f',
             padding=0,
             scale=0.7
         ),
@@ -81,7 +81,7 @@ def init_widgets_list():
             font="Noto Sans Bold",
             fontsize=16,
             foreground=colors[1],
-            background=colors[0]
+            background='#e0115f'
         ),
 
 
@@ -89,10 +89,10 @@ def init_widgets_list():
             font="Noto Sans",
             fontsize=16,
             # Here enter your network name
-            interface=["wl01"],
+            interface="wlo1",
             format='{down} ↓↑ {up}',
             foreground=colors[1],
-            background=colors[11],
+            background=['#fa1e4e', '#fa1e4e'],
             padding=0,
         ),
         widget.Image(
@@ -105,35 +105,17 @@ def init_widgets_list():
         ),
         widget.DF(
             foreground=colors[1],
-            background=colors[2],
+            background='#c21e56',
             fontsize=16,
             warn_space=30,
-            warn_color='ff0000',
-            format='{p} ({uf}{m}|{r:.0f}%)',
-
+            warn_color=colors[1],
+            format='  {p} ({uf}{m}|{r:.0f}%)  ',
+            visible_on_warn = False,
             mouse_callbacks={
                 'Button1': lambda: qtile.cmd_spawn('gparted')},
         ),
 
-        widget.Image(
 
-            foreground=colors[1],
-            background=colors[13],
-            fontsize=16,
-            filename=home + '/.config/qtile/icons/cpu.png',
-            margin=1,
-        ),
-
-        widget.CPU(
-            font="Noto Sans",
-            format='{freq_current}GHz {load_percent}%',
-            update_interval=1,
-            fontsize=16,
-            foreground=colors[1],
-            background=colors[13],
-            mouse_callbacks={
-                'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
-        ),
 
         widget.Image(
 
@@ -150,11 +132,29 @@ def init_widgets_list():
             fontsize=16,
             measure_mem='M',
             foreground=colors[1],
-            background=colors[9],
+            background='#ee204d',
             mouse_callbacks={
                 'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
         ),
+        widget.Image(
 
+            foreground=colors[1],
+            background=colors[13],
+            fontsize=16,
+            filename=home + '/.config/qtile/icons/cpu.png',
+            margin=1,
+        ),
+
+        widget.CPU(
+            font="Noto Sans",
+            format='{freq_current}GHz {load_percent}%',
+            update_interval=1,
+            fontsize=16,
+            foreground=colors[1],
+            background='#c21e56',
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
+        ),
         widget.Image(
 
             foreground=colors[1],
@@ -166,18 +166,19 @@ def init_widgets_list():
 
 
         widget.Clock(
-            foreground=colors[4],
-            background=colors[15],
+            foreground=colors[1],
+            background='#ee204d',
             fontsize=16,
             format="%Y-%m-%d %I:%M"
         ),
 
         widget.Systray(
-            background=colors[5],
+            background='#c21e56',
             icon_size=20,
             padding=4
         ),
     ]
+    # Cerise Red
     return widgets_list
 
 

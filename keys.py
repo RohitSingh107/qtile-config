@@ -1,6 +1,8 @@
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule, ScratchPad, DropDown
 from libqtile.command import lazy
 
+import subprocess as sp
+
 from defaults import mod, mod1, mod2, home, myTerm, systemMonitor
 from groups import groups
 
@@ -22,6 +24,13 @@ def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
         if switch_screen == True:
             qtile.cmd_to_screen(i + 1)
 
+
+# def brightnessCon(inc = True):
+#     r = sp.run(["brightnessctl", "s", "5%-"], text=True)
+#     o = r.stdout
+#     t = o.split('\n')[2][1:]
+#     # r = sp.run(["notify-send", t])
+#     return t
 
 # ## Need work here
 # @lazy.function
@@ -101,8 +110,9 @@ keys = [
     # MULTIMEDIA KEYS
 
     # INCREASE/DECREASE BRIGHTNESS
-    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl s +5%")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 5%- ")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn(home + '/.config/qtile/scripts/brightness.sh inc')),
+    Key([], "XF86MonBrightnessDown", lazy.spawn(home + '/.config/qtile/scripts/brightness.sh dec')),
+    # Key([], "XF86MonBrightnessDown", lazy.spawn(f"notify-send {brightnessCon(False)}")),
 
     # INCREASE/DECREASE/MUTE VOLUME
     Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),

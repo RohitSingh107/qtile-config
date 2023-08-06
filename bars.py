@@ -89,7 +89,7 @@ def init_widgets_list():
             font="Noto Sans",
             fontsize=16,
             # Here enter your network name
-            interface=["wl01"],
+            interface="wlo1",
             format='{down} ↓↑ {up}',
             foreground=colors[1],
             background=colors[11],
@@ -108,9 +108,9 @@ def init_widgets_list():
             background=colors[2],
             fontsize=16,
             warn_space=30,
-            warn_color='ff0000',
-            format='{p} ({uf}{m}|{r:.0f}%)',
-
+            warn_color=colors[1],
+            format='  {p} ({uf}{m}|{r:.0f}%)  ',
+            visible_on_warn = False,
             mouse_callbacks={
                 'Button1': lambda: qtile.cmd_spawn('gparted')},
         ),

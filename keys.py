@@ -3,7 +3,7 @@ from libqtile.command import lazy
 
 import subprocess as sp
 
-from defaults import mod, mod1, mod2, home, myTerm, systemMonitor
+from defaults import mod, mod1, mod2, home, myTerm, systemMonitor, myFM, myBrowser
 from groups import groups
 
 
@@ -63,17 +63,16 @@ keys = [
     Key([mod], "q", lazy.window.kill()),
     Key([mod], "t", lazy.spawn('xterm')),
     Key([mod], "v", lazy.spawn('pavucontrol')),
-    Key([mod], "d", lazy.spawn(
-        "dmenu_run -i -nb '#191919' -nf '#ff1493' -sb '#ff1493' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=15'")),
+    Key([mod], "d", lazy.spawn("dmenu_run -i -nb '#191919' -nf '#ff1493' -sb '#ff1493' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=15'")),
     Key([mod], "Escape", lazy.spawn('xkill')),
     Key([mod], "Return", lazy.spawn(myTerm)),
-    Key([mod], "KP_Enter", lazy.spawn('alacritty')),
+    Key([mod], "KP_Enter", lazy.spawn(myTerm)),
     Key([mod], "x", lazy.shutdown()),
 
     # SUPER + SHIFT KEYS
 
-    Key([mod, "shift"], "Return", lazy.spawn('pcmanfm')),
-    # Key([mod], "d", lazy.spawn('nwggrid -p -o 0.4')),
+    Key([mod, "shift"], "Return", lazy.spawn(myFM)),
+    Key([mod, "shift"], "d", lazy.spawn('nwggrid -p -o 0.4')),
     #    Key([mod, "shift"], "d", lazy.spawn(home + '/.config/qtile/scripts/dmenu.sh')),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
@@ -91,8 +90,8 @@ keys = [
 
 
     Key(["mod1"], "p", lazy.spawn('pamac-manager')),
-    Key(["mod1"], "f", lazy.spawn('firedragon')),
-    Key(["mod1"], "m", lazy.spawn('pcmanfm')),
+    Key(["mod1"], "f", lazy.spawn(myBrowser)),
+    Key(["mod1"], "m", lazy.spawn(myFM)),
     Key(["mod1"], "w", lazy.spawn('garuda-welcome')),
 
 

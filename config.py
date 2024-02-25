@@ -27,17 +27,16 @@
 
 # This config is inspired by https://github.com/arcolinux/arcolinux-qtile
 
-
 from typing import List
 
 # My home made imports
-from screens import * 
-from groups import *
-from defaults import *
-from scratchpads import *
+from screens import screens
+from groups import groups
+from defaults import myTerm, home, mod, mod1, mod2
+from scratchpads import scratchpad
 from keybindings import keys, mouse
-from layouts import *
-from hook_and_lazy_functions import *
+from layouts import layouts, floating_layout
+from hook_and_lazy_functions import start_always
 
 # ScratchPads
 groups.append(scratchpad)

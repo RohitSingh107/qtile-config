@@ -27,62 +27,27 @@
 
 # This config is inspired by https://github.com/arcolinux/arcolinux-qtile
 
-import os
-import subprocess
-from libqtile import hook
-from libqtile.command import lazy
+
+from typing import List
 
 # My home made imports
-from screens import screens
-from groups import groups
-from defaults import myTerm, home, mod, mod1, mod2
-from scratchpads import scratchpad
-from keys import keys, mouse
-from layouts import layouts, floating_layout
+from screens import * 
+from groups import *
+from defaults import *
+from scratchpads import *
+from keybindings import keys, mouse
+from layouts import *
+from hook_and_lazy_functions import *
 
 # ScratchPads
 groups.append(scratchpad)
 
 
-@lazy.function
-def window_to_prev_group(qtile):
-    if qtile.currentWindow is not None:
-        i = qtile.groups.index(qtile.currentGroup)
-        qtile.currentWindow.togroup(qtile.groups[i - 1].name)
-
-
-@lazy.function
-def window_to_next_group(qtile):
-    if qtile.currentWindow is not None:
-        i = qtile.groups.index(qtile.currentGroup)
-        qtile.currentWindow.togroup(qtile.groups[i + 1].name)
-
-
-
-
-@hook.subscribe.startup_once
-def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
-
-@hook.subscribe.startup
-def start_always():
-    # Set the cursor to something sane in X
-    subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
-
-@hook.subscribe.client_new
-def set_floating(window):
-    if (window.window.get_wm_transient_for()
-            or window.window.get_wm_type() in floating_types):
-        window.floating = True
-
-
 dgroups_key_binder = None
-dgroups_app_rules = []
+dgroups_app_rules : List = []
 
 main = None
 
-floating_types = ["notification", "toolbar", "splash", "dialog"]
 
 follow_mouse_focus = True
 bring_front_click = False

@@ -70,6 +70,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='lxpolkit'),
     Match(wm_class='Lxpolkit'),
     Match(wm_class='yad'),
+    Match(wm_class='zenity'),
     Match(wm_class='Yad'),
     Match(wm_class='Cairo-dock'),
     Match(wm_class='cairo-dock'),

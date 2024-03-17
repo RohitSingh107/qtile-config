@@ -31,7 +31,6 @@ def start_once():
 def start_always():
     # Set the cursor to something sane in X
     subprocess.Popen(["xsetroot", "-cursor_name", "left_ptr"])
-    subprocess.Popen(["kitty"])
 
 
 @hook.subscribe.client_new

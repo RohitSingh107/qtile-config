@@ -1,7 +1,9 @@
 from libqtile.command import lazy
 from libqtile import hook
 import subprocess
-import os
+
+from autostart import run_all_processes
+
 
 
 floating_types = ["notification", "toolbar", "splash", "dialog"]
@@ -23,8 +25,9 @@ def window_to_next_group(qtile):
 
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser("~")
-    subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
+    # home = os.path.expanduser("~")
+    # subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
+    run_all_processes()
 
 
 @hook.subscribe.startup

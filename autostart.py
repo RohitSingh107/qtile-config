@@ -1,8 +1,7 @@
 import subprocess
-import os
+from defaults import home, wayland, wallpaper
 
 
-home = os.path.expanduser("~")
 
 processes = [
     "lxsession",
@@ -11,8 +10,8 @@ processes = [
     "blueman-applet",
     f"picom --config {home}/.config/picom/picom-blur.conf",
     "dunst",
-    "feh --bg-fill /usr/share/wallpapers/garuda-wallpapers/Abstract.jpg",
-    # "cbatticon",
+    f"swaybg --image {wallpaper}" if wayland else f"feh --bg-fill {wallpaper}",
+    "cbatticon",
 ]
 
 

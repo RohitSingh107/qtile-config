@@ -8,7 +8,7 @@ processes = [
     "nm-applet",
     "numlockx on",
     "blueman-applet",
-    f"picom --config {home}/.config/picom/picom-blur.conf",
+    # f"picom --config {home}/.config/picom/picom-blur.conf" if not wayland else None,
     "dunst",
     f"swaybg --image {wallpaper}" if wayland else f"feh --bg-fill {wallpaper}",
     "cbatticon",
@@ -16,6 +16,10 @@ processes = [
 
 
 def run(process: str):
+
+    if not process:
+        return
+
     com = process.split()
     try:
         subprocess.check_call(["pgrep", com[0]])

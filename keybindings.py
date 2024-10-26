@@ -1,5 +1,5 @@
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule, ScratchPad, DropDown
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 
 
 from defaults import mod, mod1, mod2, home, myTerm, systemMonitor, myFM, myBrowser

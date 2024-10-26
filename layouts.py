@@ -94,6 +94,9 @@ floating_layout = layout.Floating(
         Match(wm_class="Yad"),
         Match(wm_class="Cairo-dock"),
         Match(wm_class="cairo-dock"),
+        Match(wm_class="Qalculate-gtk"),
+        Match(role='pop-up'),
+        Match(wm_class="scrcpy")
     ],
     **floating_layout_theme
 )

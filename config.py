@@ -58,8 +58,8 @@ focus_on_window_activation = "focus" # or smart
 wmname = "LG3D"
 
 
-# from libqtile.backend.wayland import InputConfig
-#
-# wl_input_rules = {
-#     "1267:12377:ELAN1300:00 04F3:3059 Touchpad": InputConfig(left_handed=True)
-# }
+from libqtile.backend.wayland import InputConfig
+
+wl_input_rules = {
+    "type:touchpad": InputConfig(dwt = True, tap = True, natural_scroll = True)
+}

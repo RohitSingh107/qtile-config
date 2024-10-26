@@ -1,4 +1,4 @@
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 from libqtile import hook
 import subprocess
 

@@ -74,7 +74,7 @@ def init_widgets_list():
             font="Noto Sans",
             fontsize=16,
             # Here enter your network name
-            interface="wlo1",
+            interface="enp3s0f3u1u1c2",
             format="{down} ↓↑ {up}",
             foreground=colors[1],
             background=colors[11],
